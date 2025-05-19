@@ -17,7 +17,7 @@ export default function Sobre() {
       <Text style={styles.header}>Bem-vindo de volta, Doador!</Text>
 
       <View style={styles.card}>
-        <Text style={styles.cardTitle}>🌱 Seu impacto</Text>
+        <Text style={styles.cardTitle}>🌱 Seu impacto no mundo </Text>
         <Text style={styles.impactText}>
           Você já reciclou <Text style={styles.bold}>25kg</Text> de materiais!
         </Text>a
