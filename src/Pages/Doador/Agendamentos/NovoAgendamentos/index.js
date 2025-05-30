@@ -1,63 +1,42 @@
-import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  Alert,
-} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React from 'react';
+import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, Alert } from 'react-native';
+import { useRoute, useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Feather';
 
 export default function NovoAgendamento() {
+  const route = useRoute();
   const navigation = useNavigation();
+  const { materiais } = route.params || { materiais: [] };
 
-  const [material, setMaterial] = useState('');
-  const [quantidade, setQuantidade] = useState('');
-  const [dataHora, setDataHora] = useState('');
-
-  const agendar = () => {
-    if (!material || !quantidade || !dataHora) {
-      Alert.alert('Erro', 'Preencha todos os campos.');
-      return;
-    }
-
-    // Simulação de envio do agendamento
-    Alert.alert('Sucesso', 'Agendamento realizado com sucesso!');
-    navigation.goBack(); // volta para a lista de agendamentos
+  const confirmarEnvio = () => {
+    Alert.alert('Sucesso!', 'Seu agendamento foi enviado com sucesso!');
+    navigation.goBack(); // ou navegar para outra tela principal
   };
+
+  const renderItem = ({ item }) => (
+    <View style={styles.card}>
+      <Image source={{ uri: item.imagem }} style={styles.imagem} />
+      <View style={styles.info}>
+        <Text style={styles.nome}>{item.nome}</Text>
+        <Text style={styles.quantidade}>{item.quantidade} kg</Text>
+      </View>
+    </View>
+  );
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>🗓️ Novo Agendamento</Text>
+      <Text style={styles.titulo}>📝 Detalhes do Agendamento</Text>
 
-      <Text style={styles.label}>Material reciclável</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Ex: Papelão, Plástico, Vidro"
-        value={material}
-        onChangeText={setMaterial}
+      <FlatList
+        data={materiais}
+        keyExtractor={(item) => item.id}
+        renderItem={renderItem}
+        contentContainerStyle={{ paddingBottom: 20 }}
       />
 
-      <Text style={styles.label}>Quantidade (kg)</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Ex: 5"
-        value={quantidade}
-        onChangeText={setQuantidade}
-        keyboardType="numeric"
-      />
-
-      <Text style={styles.label}>Data e hora</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Ex: 12/05/2025 às 14h"
-        value={dataHora}
-        onChangeText={setDataHora}
-      />
-
-      <TouchableOpacity style={styles.botao} onPress={agendar}>
-        <Text style={styles.textoBotao}>Confirmar Agendamento</Text>
+      <TouchableOpacity style={styles.botao} onPress={confirmarEnvio}>
+        <Icon name="send" size={20} color="#fff" />
+        <Text style={styles.textoBotao}>Enviar Agendamento</Text>
       </TouchableOpacity>
     </View>
   );
@@ -65,41 +44,60 @@ export default function NovoAgendamento() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f9fefb',
     flex: 1,
+    backgroundColor: '#f0fdf4',
     padding: 20,
   },
   titulo: {
     fontSize: 22,
     fontWeight: 'bold',
     color: '#2d6a4f',
-    marginBottom: 24,
+    marginBottom: 20,
   },
-  label: {
-    fontSize: 16,
-    color: '#1b4332',
-    marginBottom: 6,
-  },
-  input: {
+  card: {
     backgroundColor: '#fff',
-    borderRadius: 8,
-    paddingHorizontal: 12,
-    paddingVertical: 10,
-    fontSize: 15,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: '#ccc',
+    borderRadius: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 14,
+    marginBottom: 12,
+    shadowColor: '#000',
+    shadowOpacity: 0.05,
+    shadowOffset: { width: 0, height: 1 },
+    elevation: 2,
+  },
+  imagem: {
+    width: 50,
+    height: 50,
+    marginRight: 16,
+    resizeMode: 'contain',
+  },
+  info: {
+    flex: 1,
+  },
+  nome: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#1b4332',
+  },
+  quantidade: {
+    fontSize: 14,
+    color: '#4c6e54',
+    marginTop: 4,
   },
   botao: {
-    backgroundColor: '#52b788',
+    backgroundColor: '#40916c',
     paddingVertical: 14,
-    borderRadius: 10,
+    borderRadius: 12,
+    flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
     marginTop: 10,
   },
   textoBotao: {
     color: '#fff',
-    fontSize: 16,
     fontWeight: '600',
+    fontSize: 16,
+    marginLeft: 8,
   },
 });
