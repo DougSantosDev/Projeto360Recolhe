@@ -83,6 +83,7 @@ export default function RecicladosDoador() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingVertical: 40,
     backgroundColor: '#fffacd',
     padding: 20,
   },

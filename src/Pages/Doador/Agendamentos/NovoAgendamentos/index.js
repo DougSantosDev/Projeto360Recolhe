@@ -45,7 +45,8 @@ export default function NovoAgendamento() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f0fdf4',
+    paddingVertical: 50,
+    backgroundColor: '#fffacd',
     padding: 20,
   },
   titulo: {
@@ -87,7 +88,7 @@ const styles = StyleSheet.create({
   },
   botao: {
     backgroundColor: '#40916c',
-    paddingVertical: 14,
+    paddingVertical: 24,
     borderRadius: 12,
     flexDirection: 'row',
     justifyContent: 'center',

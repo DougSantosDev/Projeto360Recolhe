@@ -22,6 +22,7 @@ export default function NoticiasDetalhes({ route }) {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
+    paddingVertical: 50,
     backgroundColor: '#f9fefb',
   },
   imagem: {

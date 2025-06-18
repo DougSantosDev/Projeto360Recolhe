@@ -143,7 +143,7 @@ export default function HomeDoador() {
         {/* Botão para agendar */}
         <TouchableOpacity
           style={styles.bigButton}
-          onPress={() => navigation.navigate('NovoAgendamento')}>
+          onPress={() => navigation.navigate('Reciclados')}>
           <Icon name="plus-circle" size={20} color="#fff" />
           <Text style={styles.bigButtonText}>Agendar nova coleta</Text>
         </TouchableOpacity>
@@ -155,7 +155,8 @@ export default function HomeDoador() {
 const styles = StyleSheet.create({
   safe: {
     flex: 1,
-    backgroundColor: '#f2fdf2',
+    paddingVertical: 20,
+    backgroundColor: '#fffacd',
   },
   container: {
     padding: 20,

@@ -120,7 +120,7 @@ function TabNavigatorColetor() {
 function DrawerNavigatorDoador() {
   return (
     <Drawer.Navigator screenOptions={{ headerShown: false }}>
-      <Drawer.Screen name="HomeDoadorTabs" component={TabNavigatorDoador} />
+      <Drawer.Screen name="Meus Dados" component={TabNavigatorDoador} />
     </Drawer.Navigator>
   );
 }

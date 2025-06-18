@@ -95,7 +95,8 @@ export default function Noticias() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f9fefb',
+    backgroundColor: '#fffacd',
+    paddingVertical: 40,
     padding: 16,
   },
   titulo: {

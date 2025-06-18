@@ -53,7 +53,7 @@ export default function Agendamentos() {
         ListFooterComponent={
           <TouchableOpacity
             style={styles.botaoNovo}
-            onPress={() => navigation.navigate('NovoAgendamento')}>
+            onPress={() => navigation.navigate('Reciclados')}>
             <Text style={styles.textoBotaoNovo}>+ Novo Agendamento</Text>
           </TouchableOpacity>
         }
@@ -78,7 +78,8 @@ const getStatusStyle = (status) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fefb',
+    paddingVertical: 50,
+    backgroundColor: '#fffacd',
     padding: 16,
   },
   titulo: {

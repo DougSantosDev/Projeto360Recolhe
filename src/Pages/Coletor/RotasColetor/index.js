@@ -129,7 +129,8 @@ export default function RotasColetor() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fffacd',
+    backgroundColor: '#f2fdf2',
+    paddingVertical: 50,
     padding: 20,
   },
   titulo: {

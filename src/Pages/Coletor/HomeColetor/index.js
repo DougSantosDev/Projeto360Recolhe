@@ -34,25 +34,26 @@ export default function HomeColetor() {
           <Text style={styles.buttonText}>Ver detalhes</Text>
         </TouchableOpacity>
       </View>
-
-      {/* Botão de nova coleta */}
-      <TouchableOpacity style={styles.bigButton}>
-        <Icon name="plus-circle" size={20} color="#fff" />
-        <Text style={styles.bigButtonText}>Agendar nova coleta</Text>
-      </TouchableOpacity>
-    </ScrollView>
+      </ScrollView>
+    //   {/* Botão de nova coleta */}
+    //   <TouchableOpacity style={styles.bigButton}>
+    //     <Icon name="plus-circle" size={20} color="#fff" />
+    //     <Text style={styles.bigButtonText}>Agendar nova coleta</Text>
+    //   </TouchableOpacity>
+    // </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f2fdf2',
+    paddingVertical: 50,
     padding: 16,
   },
   header: {
     fontSize: 22,
     fontWeight: '600',
-    marginBottom: 20,
+    marginBottom: 30,
     color: '#2d6a4f',
   },
   card: {

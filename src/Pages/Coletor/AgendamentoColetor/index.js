@@ -94,7 +94,8 @@ export default function AgendamentosColetor() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fffacd',
+    paddingVertical: 50,
+    backgroundColor: '#f2fdf2',
     padding: 20,
   },
   titulo: {
