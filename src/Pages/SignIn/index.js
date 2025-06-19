@@ -2,17 +2,18 @@ import React, { useState } from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   TextInput,
   TouchableOpacity,
+  StyleSheet,
   Alert,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { useUser } from '../../context/UsarContext';
 
 export default function SignIn({ navigation, route }) {
-  const { tipo } = route.params; // Pegando se é 'coletor' ou 'doador'
-  const { login } = useUser(); // Importa a função login do contexto
+  const { tipo } = route.params; // 'coletor' ou 'doador'
+  const { login } = useUser();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -24,7 +25,7 @@ export default function SignIn({ navigation, route }) {
 
     if (email === 'a' && password === 'A') {
       Alert.alert('Sucesso', 'Login realizado com sucesso!');
-      login(tipo); // Atualiza o estado de autenticação
+      login(tipo); // Atualiza tipo e autenticação no contexto
     } else {
       Alert.alert('Erro', 'Email ou senha incorretos.');
     }
@@ -32,10 +33,7 @@ export default function SignIn({ navigation, route }) {
 
   return (
     <View style={styles.container}>
-      <Animatable.View
-        animation="fadeInLeft"
-        delay={500}
-        style={styles.containerHeader}>
+      <Animatable.View animation="fadeInLeft" delay={500} style={styles.containerHeader}>
         <Text style={styles.message}>Bem-vindo(a)</Text>
       </Animatable.View>
 
@@ -65,9 +63,8 @@ export default function SignIn({ navigation, route }) {
 
         <TouchableOpacity
           style={styles.buttonRegister}
-          onPress={() =>
-            Alert.alert('Info', 'Aqui vai a navegação para cadastro!')
-          }>
+          onPress={() => navigation.navigate('SignUp')}
+        >
           <Text style={styles.registerText}>
             Não possui uma conta? Cadastre-se
           </Text>
@@ -93,8 +90,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   containerForm: {
-    backgroundColor: '#fffacd',
     flex: 1,
+    backgroundColor: '#fffacd',
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     paddingStart: '5%',

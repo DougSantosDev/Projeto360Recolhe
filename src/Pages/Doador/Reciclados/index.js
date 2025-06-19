@@ -34,7 +34,7 @@ export default function RecicladosDoador() {
 
   const confirmarAgendamento = () => {
     const selecionados = materiais.filter((item) => item.selecionado);
-    navigation.navigate('NovoAgendamento', { agendamento: selecionados });
+    navigation.navigate('NovoAgendamento', { materiais: selecionados });
   };
 
   const renderItem = ({ item }) => (

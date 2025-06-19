@@ -1,4 +1,5 @@
-import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { useNavigation } from '@react-navigation/native';
 import { useUser } from '../../context/UsarContext';
@@ -18,32 +19,28 @@ export default function Escolha() {
         />
       </View>
 
-      <Animatable.View
-        delay={600}
-        animation="fadeInUp"
-        style={styles.containerForm}>
+      <Animatable.View delay={600} animation="fadeInUp" style={styles.containerForm}>
         <Text style={styles.title}>Bem-vindo</Text>
         <Text style={styles.title}>RECOLHE360</Text>
         <Text style={styles.paragraph}>Escolha uma opção para continuar</Text>
 
         <TouchableOpacity
+          style={styles.button}
           onPress={() => {
             setTipo('coletor');
-            navigation.navigate('SignIn', { tipo: 'coletor' }); // 👈 passando param
+            navigation.navigate('SignIn', { tipo: 'coletor' });
           }}
-          style={styles.button}>
+        >
           <Text style={styles.buttonText}>Sou Coletor</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
+          style={[styles.button, { backgroundColor: '#2e7d32', marginTop: 15 }]}
           onPress={() => {
             setTipo('doador');
-            navigation.navigate('SignIn', { tipo: 'doador' }); // 👈 passando param
+            navigation.navigate('SignIn', { tipo: 'doador' });
           }}
-          style={[
-            styles.button,
-            { backgroundColor: '#2e7d32', marginTop: 15 },
-          ]}>
+        >
           <Text style={styles.buttonText}>Sou Doador</Text>
         </TouchableOpacity>
       </Animatable.View>
@@ -79,8 +76,7 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: 'bold',
     color: '#333',
-    marginTop: 5,
-    marginBottom: 5,
+    marginVertical: 5,
   },
   paragraph: {
     fontSize: 16,

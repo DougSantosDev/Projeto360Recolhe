@@ -1,6 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+import { useLayoutEffect } from 'react';
+import { Button } from 'react-native';
+
+
+
 
 export default function HomeColetor() {
   return (
