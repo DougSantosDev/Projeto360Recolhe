@@ -147,9 +147,9 @@ function DrawerNavigatorDoador() {
         component={TabNavigatorDoador}
         options={{ title: 'Principal' }}
       />
-      <Drawer.Screen name="MinhaContaDoador" component={MinhaContaDoador} options={{ title: 'Minha Conta' }} />
-      <Drawer.Screen name="ConfiguracoesDoador" component={Configuracoes} />
-      <Drawer.Screen name="SobreDoador" component={Sobre} />
+      <Drawer.Screen name="MinhaConta" component={MinhaContaDoador} options={{ title: 'Minha Conta' }} />
+      <Drawer.Screen name="Configuracoes" component={Configuracoes} />
+      <Drawer.Screen name="Sobre" component={Sobre} />
     </Drawer.Navigator>
   );
 }
@@ -166,9 +166,9 @@ function DrawerNavigatorColetor() {
         component={TabNavigatorColetor}
         options={{ title: 'Principal' }}
       />
-      <Drawer.Screen name="MinhaContaColetor" component={MinhaContaColetor} options={{ title: 'Minha Conta' }} />
-      <Drawer.Screen name="ConfiguracoesColetor" component={Configuracoes} />
-      <Drawer.Screen name="SobreColetor" component={Sobre} />
+      <Drawer.Screen name="MinhaConta" component={MinhaContaColetor} options={{ title: 'Minha Conta' }} />
+      <Drawer.Screen name="Configuracoes" component={Configuracoes} />
+      <Drawer.Screen name="Sobre" component={Sobre} />
     </Drawer.Navigator>
   );
 }
