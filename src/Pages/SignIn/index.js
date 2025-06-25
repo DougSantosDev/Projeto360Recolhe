@@ -23,7 +23,7 @@ export default function SignIn({ navigation, route }) {
       return;
     }
 
-    if (email === 'a' && password === 'A') {
+    if (email === 'recolhe' && password === '360') {
       Alert.alert('Sucesso', 'Login realizado com sucesso!');
       login(tipo); // Atualiza tipo e autenticação no contexto
     } else {
