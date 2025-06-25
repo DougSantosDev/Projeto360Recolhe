@@ -10,12 +10,23 @@ export default function NovoAgendamento() {
 
   const confirmarEnvio = () => {
     Alert.alert('Sucesso!', 'Seu agendamento foi enviado com sucesso!');
-    navigation.goBack(); // ou navegar para outra tela principal
+    navigation.goBack(); // Ou navegue para outra tela principal se quiser
   };
 
   const renderItem = ({ item }) => (
     <View style={styles.card}>
-      <Image source={{ uri: item.imagem }} style={styles.imagem} />
+      <Image
+        source={
+          // Se for require (número), usa direto. Se for string ou {uri}, converte!
+          typeof item.imagem === 'number'
+            ? item.imagem
+            : typeof item.imagem === 'string'
+              ? { uri: item.imagem }
+              : item.imagem // cobre o caso de {uri:...}
+        }
+        style={styles.imagem}
+        resizeMode="contain"
+      />
       <View style={styles.info}>
         <Text style={styles.nome}>{item.nome}</Text>
         <Text style={styles.quantidade}>{item.quantidade} kg</Text>
@@ -54,6 +65,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#2d6a4f',
     marginBottom: 20,
+    textAlign: 'center',
   },
   card: {
     backgroundColor: '#fff',
