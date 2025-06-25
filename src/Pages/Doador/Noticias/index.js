@@ -3,11 +3,9 @@ import {
   View,
   Text,
   StyleSheet,
-  FlatList,
   Image,
   TouchableOpacity,
   ScrollView,
-  Dimensions,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -37,12 +35,12 @@ const noticias = [
 
 export default function Noticias() {
   const navigation = useNavigation();
-  const largura = Dimensions.get('window').width;
 
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.titulo}>🗞️ Notícias Recentes</Text>
 
+      {/* Destaque */}
       <View style={styles.destaque}>
         <Image
           source={
@@ -66,32 +64,28 @@ export default function Noticias() {
 
       <Text style={styles.subtitulo}>Outras notícias</Text>
 
-      <FlatList
-        data={noticias.slice(1)}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <View style={styles.card}>
-            <Image
-              source={
-                typeof item.imagem === 'number'
-                  ? item.imagem
-                  : { uri: item.imagem }
-              }
-              style={styles.imagemMini}
-            />
-            <View style={styles.info}>
-              <Text style={styles.tituloMini}>{item.titulo}</Text>
-              <Text style={styles.descricaoMini}>{item.descricao}</Text>
-              <TouchableOpacity
-                style={styles.botaoMini}
-                onPress={() => navigation.navigate('NoticiasDetalhes', item)}
-              >
-                <Text style={styles.textoBotao}>Ver mais</Text>
-              </TouchableOpacity>
-            </View>
+      {noticias.slice(1).map((item) => (
+        <View key={item.id} style={styles.card}>
+          <Image
+            source={
+              typeof item.imagem === 'number'
+                ? item.imagem
+                : { uri: item.imagem }
+            }
+            style={styles.imagemMini}
+          />
+          <View style={styles.info}>
+            <Text style={styles.tituloMini}>{item.titulo}</Text>
+            <Text style={styles.descricaoMini}>{item.descricao}</Text>
+            <TouchableOpacity
+              style={styles.botaoMini}
+              onPress={() => navigation.navigate('NoticiasDetalhes', item)}
+            >
+              <Text style={styles.textoBotao}>Ver mais</Text>
+            </TouchableOpacity>
           </View>
-        )}
-      />
+        </View>
+      ))}
     </ScrollView>
   );
 }
@@ -158,9 +152,6 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 16,
     elevation: 1,
-    shadowColor: '#000',
-    shadowOpacity: 0.05,
-    shadowOffset: { width: 0, height: 1 },
   },
   imagemMini: {
     width: 60,

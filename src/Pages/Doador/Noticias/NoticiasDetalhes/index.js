@@ -10,7 +10,7 @@ import {
 import { Feather } from '@expo/vector-icons';
 
 const { width: screenWidth } = Dimensions.get('window');
-const imageSize = screenWidth * 0.8; // 80% da largura da tela
+const imageSize = screenWidth * 0.8;
 
 export default function NoticiasDetalhes({ route }) {
   const { titulo, descricao, imagem } = route.params;
@@ -29,11 +29,8 @@ export default function NoticiasDetalhes({ route }) {
 
       <View style={styles.conteudo}>
         <Text style={styles.data}>🗓️ Publicado em 24 de junho de 2025</Text>
-
         <Text style={styles.titulo}>{titulo}</Text>
-
         <Text style={styles.subtitulo}>🌱 Um passo a mais rumo à sustentabilidade</Text>
-
         <Text style={styles.descricao}>{descricao}</Text>
 
         <View style={styles.extraBox}>
@@ -61,7 +58,7 @@ const styles = StyleSheet.create({
   },
   imagem: {
     width: imageSize,
-    height: imageSize, // altura = largura → quadrada
+    height: imageSize,
     borderRadius: 12,
   },
   conteudo: {
