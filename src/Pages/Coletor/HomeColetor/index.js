@@ -1,13 +1,42 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-import { useLayoutEffect } from 'react';
-import { Button } from 'react-native';
-
-
-
+import { useNavigation } from '@react-navigation/native';
 
 export default function HomeColetor() {
+  const navigation = useNavigation();
+
+  const agendamentos = [
+    {
+      id: '1',
+      nome: 'João da Silva',
+      endereco: 'Rua das Palmeiras, 321 - Bairro Novo',
+      data: '29/04/2025',
+      horario: '14:00',
+      materiais: [
+        { tipo: 'Papelão', peso: '3kg' },
+        { tipo: 'Plástico', peso: '2kg' },
+      ],
+    },
+    {
+      id: '2',
+      nome: 'Maria Oliveira',
+      endereco: 'Av. Central, 765 - Centro',
+      data: '30/04/2025',
+      horario: '09:30',
+      materiais: [
+        { tipo: 'Vidro', peso: '5kg' },
+        { tipo: 'Metal', peso: '1.5kg' },
+      ],
+    },
+  ];
+
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.header}>Bem-vindo de volta, Coletor!</Text>
@@ -15,7 +44,9 @@ export default function HomeColetor() {
       {/* Impacto ambiental */}
       <View style={styles.card}>
         <Text style={styles.cardTitle}>🌱 Seu impacto</Text>
-        <Text style={styles.impactText}>Você já reciclou <Text style={styles.bold}>25kg</Text> de materiais!</Text>
+        <Text style={styles.impactText}>
+          Você já reciclou <Text style={styles.bold}>25kg</Text> de materiais!
+        </Text>
         <View style={styles.progressBar}>
           <View style={styles.progressFill} />
         </View>
@@ -30,22 +61,33 @@ export default function HomeColetor() {
         </Text>
       </View>
 
-      {/* Última coleta */}
+      {/* Últimas coletas */}
       <View style={styles.card}>
-        <Text style={styles.cardTitle}>🗓 Última coleta</Text>
-        <Text style={styles.coletaText}>Confirmada para 25/04 - Plástico e papel</Text>
-        <TouchableOpacity style={styles.button}>
+        <Text style={styles.cardTitle}>🗓 Últimas coletas agendadas</Text>
+
+        {agendamentos.map((item) => (
+          <View key={item.id} style={{ marginBottom: 12 }}>
+            <Text style={styles.agendamentoTexto}>
+              📍 {item.endereco}
+            </Text>
+            <Text style={styles.agendamentoTexto}>
+              🗓 {item.data} - {item.horario}
+            </Text>
+            <Text style={styles.agendamentoTexto}>
+              ♻️ Materiais: {item.materiais.map(m => `${m.tipo} (${m.peso})`).join(', ')}
+            </Text>
+          </View>
+        ))}
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('AgendamentosTabColetor')}
+        >
           <Icon name="calendar" size={18} color="#fff" />
           <Text style={styles.buttonText}>Ver detalhes</Text>
         </TouchableOpacity>
       </View>
-      </ScrollView>
-    //   {/* Botão de nova coleta */}
-    //   <TouchableOpacity style={styles.bigButton}>
-    //     <Icon name="plus-circle" size={20} color="#fff" />
-    //     <Text style={styles.bigButtonText}>Agendar nova coleta</Text>
-    //   </TouchableOpacity>
-    // </ScrollView>
+    </ScrollView>
   );
 }
 
@@ -105,6 +147,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 10,
   },
+  agendamentoTexto: {
+    fontSize: 14,
+    color: '#333',
+    marginBottom: 2,
+  },
   button: {
     backgroundColor: '#40916c',
     flexDirection: 'row',
@@ -112,27 +159,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 10,
     borderRadius: 10,
+    marginTop: 10,
   },
   buttonText: {
     color: '#fff',
     marginLeft: 8,
     fontWeight: '600',
-  },
-  bigButton: {
-    backgroundColor: '#2d6a4f',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 14,
-    borderRadius: 14,
-    marginTop: 10,
-    marginBottom: 30,
-  },
-  bigButtonText: {
-    color: '#fff',
-    fontWeight: '600',
-    fontSize: 16,
-    marginLeft: 8,
   },
   bold: {
     fontWeight: 'bold',
