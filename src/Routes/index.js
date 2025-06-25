@@ -5,13 +5,14 @@ import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Feather from 'react-native-vector-icons/Feather';
 import { useUser } from '../context/UsarContext';
-import { useNavigation } from '@react-navigation/native';
 
+// Importando suas telas
 import Welcome from '../Pages/Welcome';
 import Escolha from '../Pages/Escolha';
 import SignIn from '../Pages/SignIn';
 import SignUp from '../Pages/SignUp';
-
+import Configuracoes from '../Pages/configuracoes';
+import Sobre from '../Pages/Sobre';
 // DOADOR
 import Ingresso from '../Pages/Doador/Home';
 import Loja from '../Pages/Doador/Reciclados';
@@ -19,6 +20,7 @@ import Notas from '../Pages/Doador/Noticias';
 import Risada from '../Pages/Doador/Agendamentos';
 import NovoAgendamento from '../Pages/Doador/Agendamentos/NovoAgendamentos';
 import NoticiasDetalhes from '../Pages/Doador/Noticias/NoticiasDetalhes';
+import MinhaArea from '../Pages/Doador/minhaArea'; // <-- Aqui importa sua tela de perfil
 
 // COLETOR
 import HomeColetor from '../Pages/Coletor/HomeColetor';
@@ -30,14 +32,12 @@ const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
-// Componente drawer customizado com botão Sair
+// Drawer customizado com botão Sair
 function CustomDrawerContent(props) {
   const { logout } = useUser();
 
-  // Não precisa do navigation.reset, só logout()
   const handleLogout = () => {
-    logout(); 
-    // O stack principal vai detectar signed = false e mostrar a tela Escolha automaticamente
+    logout();
   };
 
   return (
@@ -124,26 +124,32 @@ function TabNavigatorColetor() {
   );
 }
 
-// Drawer DOADOR com drawerContent customizado
+// Drawer DOADOR
 function DrawerNavigatorDoador() {
   return (
     <Drawer.Navigator
-      screenOptions={{ headerShown: false }}
+      screenOptions={{ headerShown: true }}
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
-      <Drawer.Screen name="Meus Dados" component={TabNavigatorDoador} />
+      <Drawer.Screen name="Home" component={TabNavigatorDoador} options={{ title: 'Principal' }} />
+      <Drawer.Screen name="Minha Conta" component={MinhaArea} />
+      <Drawer.Screen name="Configurações" component={Configuracoes} />
+      <Drawer.Screen name="Sobre" component={Sobre} />
     </Drawer.Navigator>
   );
 }
 
-// Drawer COLETOR com drawerContent customizado
+// Drawer COLETOR
 function DrawerNavigatorColetor() {
   return (
     <Drawer.Navigator
-      screenOptions={{ headerShown: false }}
+      screenOptions={{ headerShown: true }}
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
-      <Drawer.Screen name="HomeColetorTabs" component={TabNavigatorColetor} />
+      <Drawer.Screen name="Home" component={TabNavigatorColetor} options={{ title: 'Principal' }} />
+      <Drawer.Screen name="Minha Conta" component={MinhaArea} />
+      <Drawer.Screen name="Configurações" component={Configuracoes} />
+      <Drawer.Screen name="Sobre" component={Sobre} />
     </Drawer.Navigator>
   );
 }
