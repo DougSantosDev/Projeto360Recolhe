@@ -1,3 +1,5 @@
+// src/routes/index.js
+
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -6,7 +8,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Feather from 'react-native-vector-icons/Feather';
 import { useUser } from '../context/UsarContext';
 
-// Importando suas telas
+// Importando telas
 import Welcome from '../Pages/Welcome';
 import Escolha from '../Pages/Escolha';
 import SignIn from '../Pages/SignIn';
@@ -14,19 +16,20 @@ import SignUp from '../Pages/SignUp';
 import Configuracoes from '../Pages/configuracoes';
 import Sobre from '../Pages/Sobre';
 // DOADOR
-import Ingresso from '../Pages/Doador/Home';
-import Loja from '../Pages/Doador/Reciclados';
-import Notas from '../Pages/Doador/Noticias';
-import Risada from '../Pages/Doador/Agendamentos';
+import HomeDoador from '../Pages/Doador/Home';
+import RecicladosDoador from '../Pages/Doador/Reciclados';
+import NoticiasDoador from '../Pages/Doador/Noticias';
+import AgendamentosDoador from '../Pages/Doador/Agendamentos';
 import NovoAgendamento from '../Pages/Doador/Agendamentos/NovoAgendamentos';
 import NoticiasDetalhes from '../Pages/Doador/Noticias/NoticiasDetalhes';
-import MinhaArea from '../Pages/Doador/minhaArea'; // <-- Aqui importa sua tela de perfil
+import MinhaContaDoador from '../Pages/Doador/minhaArea';
 
 // COLETOR
 import HomeColetor from '../Pages/Coletor/HomeColetor';
 import RotasColetor from '../Pages/Coletor/RotasColetor';
 import MetasColetor from '../Pages/Coletor/MetasColetor';
-import AgendamentoColetor from '../Pages/Coletor/AgendamentoColetor';
+import AgendamentosColetor from '../Pages/Coletor/AgendamentoColetor';
+import MinhaContaColetor from '../Pages/Doador/minhaArea'; // Ajuda pra exemplo, ajuste o caminho se mudar
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -52,104 +55,120 @@ function CustomDrawerContent(props) {
   );
 }
 
-// TabNavigator DOADOR
+// TabNavigator DOADOR com nomes únicos
 function TabNavigatorDoador() {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen
-        name="Home"
-        component={Ingresso}
+        name="HomeTabDoador"
+        component={HomeDoador}
         options={{
           tabBarIcon: ({ color, size }) => <Feather name="home" size={size} color={color} />,
+          title: 'Início'
         }}
       />
       <Tab.Screen
-        name="Reciclados"
-        component={Loja}
+        name="RecicladosTabDoador"
+        component={RecicladosDoador}
         options={{
           tabBarIcon: ({ color, size }) => <Feather name="trash-2" size={size} color={color} />,
+          title: 'Reciclados'
         }}
       />
       <Tab.Screen
-        name="Noticias"
-        component={Notas}
+        name="NoticiasTabDoador"
+        component={NoticiasDoador}
         options={{
           tabBarIcon: ({ color, size }) => <Feather name="book-open" size={size} color={color} />,
+          title: 'Notícias'
         }}
       />
       <Tab.Screen
-        name="Agendamentos"
-        component={Risada}
+        name="AgendamentosTabDoador"
+        component={AgendamentosDoador}
         options={{
           tabBarIcon: ({ color, size }) => <Feather name="mail" size={size} color={color} />,
+          title: 'Agendamentos'
         }}
       />
     </Tab.Navigator>
   );
 }
 
-// TabNavigator COLETOR
+// TabNavigator COLETOR com nomes únicos
 function TabNavigatorColetor() {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen
-        name="HomeColetor"
+        name="HomeTabColetor"
         component={HomeColetor}
         options={{
           tabBarIcon: ({ color, size }) => <Feather name="home" size={size} color={color} />,
+          title: 'Início'
         }}
       />
       <Tab.Screen
-        name="Rotas"
+        name="RotasTabColetor"
         component={RotasColetor}
         options={{
           tabBarIcon: ({ color, size }) => <Feather name="map" size={size} color={color} />,
+          title: 'Rotas'
         }}
       />
       <Tab.Screen
-        name="Metas"
+        name="MetasTabColetor"
         component={MetasColetor}
         options={{
           tabBarIcon: ({ color, size }) => <Feather name="target" size={size} color={color} />,
+          title: 'Metas'
         }}
       />
       <Tab.Screen
-        name="AgendamentosColetor"
-        component={AgendamentoColetor}
+        name="AgendamentosTabColetor"
+        component={AgendamentosColetor}
         options={{
           tabBarIcon: ({ color, size }) => <Feather name="calendar" size={size} color={color} />,
+          title: 'Agendamentos'
         }}
       />
     </Tab.Navigator>
   );
 }
 
-// Drawer DOADOR
+// Drawer DOADOR com nomes únicos
 function DrawerNavigatorDoador() {
   return (
     <Drawer.Navigator
       screenOptions={{ headerShown: true }}
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
-      <Drawer.Screen name="Home" component={TabNavigatorDoador} options={{ title: 'Principal' }} />
-      <Drawer.Screen name="Minha Conta" component={MinhaArea} />
-      <Drawer.Screen name="Configurações" component={Configuracoes} />
-      <Drawer.Screen name="Sobre" component={Sobre} />
+      <Drawer.Screen
+        name="HomeDrawerDoador"
+        component={TabNavigatorDoador}
+        options={{ title: 'Principal' }}
+      />
+      <Drawer.Screen name="MinhaContaDoador" component={MinhaContaDoador} options={{ title: 'Minha Conta' }} />
+      <Drawer.Screen name="ConfiguracoesDoador" component={Configuracoes} />
+      <Drawer.Screen name="SobreDoador" component={Sobre} />
     </Drawer.Navigator>
   );
 }
 
-// Drawer COLETOR
+// Drawer COLETOR com nomes únicos
 function DrawerNavigatorColetor() {
   return (
     <Drawer.Navigator
       screenOptions={{ headerShown: true }}
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
-      <Drawer.Screen name="Home" component={TabNavigatorColetor} options={{ title: 'Principal' }} />
-      <Drawer.Screen name="Minha Conta" component={MinhaArea} />
-      <Drawer.Screen name="Configurações" component={Configuracoes} />
-      <Drawer.Screen name="Sobre" component={Sobre} />
+      <Drawer.Screen
+        name="HomeDrawerColetor"
+        component={TabNavigatorColetor}
+        options={{ title: 'Principal' }}
+      />
+      <Drawer.Screen name="MinhaContaColetor" component={MinhaContaColetor} options={{ title: 'Minha Conta' }} />
+      <Drawer.Screen name="ConfiguracoesColetor" component={Configuracoes} />
+      <Drawer.Screen name="SobreColetor" component={Sobre} />
     </Drawer.Navigator>
   );
 }
@@ -172,7 +191,7 @@ const styles = StyleSheet.create({
   },
 });
 
-// STACK PRINCIPAL
+// STACK PRINCIPAL COM NOMES ÚNICOS
 export default function Routes() {
   const { signed, tipo } = useUser();
 
@@ -186,12 +205,10 @@ export default function Routes() {
           <Stack.Screen name="SignUp" component={SignUp} />
         </>
       ) : tipo === 'doador' ? (
-        <Stack.Screen name="AppDoador" component={DrawerNavigatorDoador} />
+        <Stack.Screen name="AppDoadorStack" component={DrawerNavigatorDoador} />
       ) : (
-        <Stack.Screen name="AppColetor" component={DrawerNavigatorColetor} />
+        <Stack.Screen name="AppColetorStack" component={DrawerNavigatorColetor} />
       )}
-
-      {/* Rotas acessíveis sempre */}
       <Stack.Screen name="NovoAgendamento" component={NovoAgendamento} />
       <Stack.Screen
         name="NoticiasDetalhes"
